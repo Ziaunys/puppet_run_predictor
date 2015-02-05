@@ -9,6 +9,9 @@ setup(
         author_email="eric.zounes@puppetlabs.com",
         url="http://github.com/Ziaunys/puppet_run_predictor",
         keywords=["puppetdb", "infrastructure", "orchestration"],
+        install_requires= [
+            'flask',
+        ],
         packages=find_packages(),
         entry_points="""
         [console_scripts]
