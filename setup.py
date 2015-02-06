@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
-version = __import__('puppet_run_predictor').__version__
 
 setup(
         name="puppet_run_predictor",
+        version="0.3",
         description="A tool to receive a list of files and predict which Puppet nodes would be affected by these files changing.",
         author="Eric Zounes",
         author_email="eric.zounes@puppetlabs.com",

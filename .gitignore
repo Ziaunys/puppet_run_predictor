@@ -2,5 +2,7 @@
 .Python
 bin
 lib
+dist
 include
 *.pyc
+*.egg-info

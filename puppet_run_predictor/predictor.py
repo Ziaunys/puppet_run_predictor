@@ -10,11 +10,13 @@ import requests
 
 class Predictor(object):
 
-    def __init__(self, pdb_host):
+    def __init__(self, pdb_host, path_prefix):
         self.pdb_host = pdb_host
+        self.path_prefix = path_prefix
 
     def affected_nodes(self, change_set):
         changed_nodes = {}
+        change_set = [self.path_prefix + f for f in change_set]
         url = "{pdb}/v3/resources".format(pdb=self.pdb_host)
         print change_set
         for f in change_set:
@@ -36,8 +38,11 @@ def main():
     """
     )
 
-    parser.add_argument('puppetdb_host', type=str, default='http://localhost:8080')
-    p = Predictor('http://localhost:8080')
+    parser.add_argument('--puppetdb_host', type=str, default='http://localhost:8080')
+    parser.add_argument('--bind_address', type=str, default='localhost')
+    parser.add_argument('--path_prefix', type=str, default='/etc/puppetlabs/puppet/environments/production/')
+    args = parser.parse_args()
+    p = Predictor(args.puppetdb_host, )
 
     app = Flask(__name__)
 
@@ -46,7 +51,7 @@ def main():
         print request.data
         return jsonify(**p.affected_nodes(json.loads(request.data)))
     app.debug = True
-    app.run()
+    app.run(host=args.bind_address)
 
 if __name__ == '__main__':
     main()
