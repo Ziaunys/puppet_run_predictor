@@ -42,7 +42,7 @@ def main():
     parser.add_argument('--bind_address', type=str, default='localhost')
     parser.add_argument('--path_prefix', type=str, default='/etc/puppetlabs/puppet/environments/production/')
     args = parser.parse_args()
-    p = Predictor(args.puppetdb_host, )
+    p = Predictor(args.puppetdb_host, args.path_prefix)
 
     app = Flask(__name__)
 
